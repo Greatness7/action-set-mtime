@@ -1,0 +1,17 @@
+name: "action-set-mtime"
+description: "A github action for setting the modification times of specified files."
+inputs:
+  times:
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - run: python ${{github.action_path}}/action.py
+      shell: bash
+      env:
+        TIMES: ${{inputs.times}}
